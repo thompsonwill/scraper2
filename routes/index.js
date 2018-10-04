@@ -8,7 +8,16 @@ var Article = require("../model.js");
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
-    res.render('index', { title: 'Express' });
+  Article.find()
+  
+  .then(function(dbUser) {
+    // If saved successfully, send the the new User document to the client
+    res.render('index', { title: 'Home', article: dbUser });
+  })
+  .catch(function(err) {
+    // If an error occurs, send the error to the client
+    res.json(err);
+  });
 });
 
 // Scraper and loader
@@ -59,7 +68,7 @@ router.get('/article/:id', function (req, res, next) {
   var chosen = req.params.id;
   console.log("CHOSEN ONE " + chosen);
 
-  Article.update({ _id: chosen }, {saved: true})
+  Article.update({ _id: chosen }, {saved: "true"})
   Article.find({ _id: chosen })
   
   .then(function(dbUser) {

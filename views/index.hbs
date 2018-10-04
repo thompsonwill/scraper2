@@ -1,11 +1,14 @@
 <h1>{{title}}</h1>
 <p>Welcome to {{title}}</p>
 
-<button type="button" class="btn" id="getNews" data-toggle="modal" data-target="#exampleModal">Get News</button>
+<a href="/scrape" target="new_tab"><button type="button" class="btn" id="getNews" data-toggle="modal" data-target="#exampleModal">Get News</button></a>
 
-<ul id="articleSpots">
+<ul>{{#each article}}
+<li><a href="{{this.link}}">{{this.title}}</a></li>
+<a href="/article/{{this._id}}"><button type="button" class="btn btn-success">Save</button></a>
+</ul>{{/each}}
 
-</ul>
+
 
 
 {{!-- News Modal --}}

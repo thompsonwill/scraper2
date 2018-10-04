@@ -6,7 +6,8 @@ var Schema = mongoose.Schema;
 var ArticleSchema = new Schema({
     title: String,
     link: String,
-    saved: Boolean
+    saved: Boolean,
+    comment: String
 }) 
 
 var Article = mongoose.model("Article", ArticleSchema);
