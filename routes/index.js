@@ -45,7 +45,8 @@ router.get("/scrape", function (req, res) {
       results.push({
         title: title,
         link: link,
-        saved: "false"
+        saved: "false",
+        comments: ""
       });
 
     });
@@ -82,5 +83,23 @@ router.get('/article/:id', function (req, res, next) {
   
 });
 
+router.post("/submit", function(req, res) {
+  // Create a new Book in the database
+  Article.update({comment: req.body})
+    .then(function(dbBook) {
+      // If a Book was created successfully, find one library (there's only one) and push the new Book's _id to the Library's `books` array
+      // { new: true } tells the query that we want it to return the updated Library -- it returns the original by default
+      // Since our mongoose query returns a promise, we can chain another `.then` which receives the result of the query
+      console.log(dbBook);
+    })
+    .then(function(dbLibrary) {
+      // If the Library was updated successfully, send it back to the client
+      res.json(dbLibrary);
+    })
+    .catch(function(err) {
+      // If an error occurs, send it back to the client
+      res.json(err);
+    });
+});
 
 module.exports = router;

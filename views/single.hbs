@@ -4,9 +4,14 @@
 {{/each}}
 
 <h1>Comments:</h1><br>
+{{#each article}}<ul>
+<li>{{this.comments}}</li>
+{{/each}}</ul>
 
 <form>
     <label for="comment">Type a comment</label>
     <input type="text" id="comment">
     <button type="button" id="sendComment" class="btn btn-success">Send</button>
 </form>
+
+<script src="/javascripts/comment.js"></script>
