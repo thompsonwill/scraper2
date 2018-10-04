@@ -59,26 +59,12 @@ router.get('/article/:id', function (req, res, next) {
   var chosen = req.params.id;
   console.log("CHOSEN ONE " + chosen);
 
-  Article.find({ id: req.params.id })
+  Article.update({ _id: chosen }, {saved: true})
+  Article.find({ _id: chosen })
+  
   .then(function(dbUser) {
     // If saved successfully, send the the new User document to the client
     res.render('single', { title: 'Single', article: dbUser });
-  })
-  .catch(function(err) {
-    // If an error occurs, send the error to the client
-    res.json(err);
-  });
-  
-});
-
-router.get('/search', function (req, res, next) {
-  var chosen = req.params.id;
-  console.log("CHOSEN ONE " + chosen);
-
-  Article.find()
-  .then(function(dbUser) {
-    // If saved successfully, send the the new User document to the client
-    res.json(dbUser);
   })
   .catch(function(err) {
     // If an error occurs, send the error to the client
